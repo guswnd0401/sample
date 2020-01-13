@@ -2,6 +2,7 @@ package com.jung.sample;
 
 import java.text.DateFormat;
 
+
 import java.util.Date;
 import java.util.Locale;
 
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jung.sample.dao.TestDao;
 import com.jung.sample.dto.JoinDto;
-import com.jung.sample.dto.TDto;
 
 
 /**
@@ -71,7 +71,7 @@ public class HomeController {
 	}
 	
 	//회원가입2
-	@RequestMapping("join2")
+	@RequestMapping("join")
 	public String join2(HttpServletRequest request, Model model) {
 		dao.join(request.getParameter("uId"), request.getParameter("uPw"),request.getParameter("uName"), request.getParameter("uEmail"),
 		request.getParameter("uPhone"), request.getParameter("uAg1"), request.getParameter("uAg2"));
@@ -79,7 +79,7 @@ public class HomeController {
 	}
 	
 	//메인페이지에서 회원가입 클릭시 회원가입페이지 이동.
-	@RequestMapping("join2_view")
+	@RequestMapping("join_view")
 		public String join_view2() {
 		return "join2_view";
 	}
@@ -110,51 +110,6 @@ public class HomeController {
 	
 		return result1;
 	
-	}
-	
-	//////////////////////////////////////////////////////////////////////////////////////
-	
-	//회원가입
-	@RequestMapping("join")
-	public String join(HttpServletRequest request, Model model) {
-		dao.joinDao(request.getParameter("tId"), request.getParameter("tPw"));
-		return "redirect:join_view";
-	}
-	
-	@RequestMapping("join_view")
-	public String join_view() {
-		return "join_view";
-	}
-	
-	@RequestMapping("checkId")
-	public @ResponseBody String checkId(TDto dto) {
-		
-		String result = null;
-		
-		try {
-			
-			String str1 = dao.checkId(dto);
-			
-			if(str1 == null) {
-				System.out.println("DB에 아이디가 없음");
-				result = "ok";
-			}
-			else {
-				System.out.println("DB에 아이디 존재");
-				result = "no";
-			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		return result;
-		
-	}
-	//////test
-	@RequestMapping("home1")
-	public String home1() {
-		return "home";
 	}
 	
 }

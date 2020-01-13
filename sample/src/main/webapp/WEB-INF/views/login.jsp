@@ -79,7 +79,7 @@ a:hover,a:link,a:visited {
 			<br><hr/><br/>
 			
 			<div>
-				<a href="#">아이디 찾기</a>&nbsp;&nbsp;<a href="#">비밀번호 찾기</a>&nbsp;&nbsp;<a href="join2_view">회원가입</a>
+				<a href="#">아이디 찾기</a>&nbsp;&nbsp;<a href="#">비밀번호 찾기</a>&nbsp;&nbsp;<a href="join_view">회원가입</a>
 			</div>
 			
 		</div>

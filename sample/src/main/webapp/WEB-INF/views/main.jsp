@@ -19,27 +19,106 @@
 
 <title>Insert title here</title>
 <style>
-body {
-	background-color : #F6F6F6;
-}
 /*헤더1(로그인,회원가입,로고)*/
 #logo {
 	color : white;
 	margin-left : auto;
+	margin-top : 15px;
+}
+.navbar-nav {
+	margin-top : 15px;
 }
 nav {
 	height : 100px;
 	background-color : #FF4848;
 }
+
+/*배너관련 스타일 css*/
+.d-block {
+	width : 100%;
+	height : 100%; 
+	cursor: pointer;
+}
+.d-block:hover {
+	opacity: 0.6;
+}
+
+/*모달 css*/
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Add Animation */
+.modal-content {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+/* 모달창 띄울때 점점크게 듸우는 효과 */
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 80px;
+  right: 620px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens  모달창 이미지*/
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+
+
 /*주소 검색 section*/
 #sec {
-	background-color : #FFFFFF; /* 이미지 또는 배경색 바꾸기*/
-	border : 2px solid #FF4848;
+	/*background-color : #FFFFFF; /* 이미지 또는 배경색 바꾸기*/
+	border-bottom : 1px solid #FF4848;
 }
 #ad1 {
 	display : table;
 	margin : auto;
-	height : 200px;
+	height : 100px;
 }
 #ad2 {	
 	display : table-cell;
@@ -100,28 +179,59 @@ a:hover,a:link,a:visited {
 		   		</li>
 		   		
 			    <li class="nav-item">
-			    	<a class="nav-link" href="join2_view"><h3>회원가입</h3></a>
+			    	<a class="nav-link" href="join_view"><h3>회원가입</h3></a>
 			    </li>
 	 		</ul>
 	 		<a id="logo" href="home"><h3>HK라이더스</h3></a>
 	 	</div>
 	</nav>
 </header>
+<br/>
+<!-- 배너 시작 -->
+<!-- ================ Start Popular Course Area ================= -->
+<section class="container">
+
+	<div id="event" class="carousel slide" data-ride="carousel">
+		
+		  <!-- Indicators -->
+		  <ul id="indicator" class="carousel-indicators">
+		    <li data-target="#event" data-slide-to="0" class="active bg-danger"></li>
+		    <li data-target="#event" data-slide-to="1" class=" bg-danger"></li>
+		    <li data-target="#event" data-slide-to="2" class=" bg-danger"></li>
+		  </ul>
+		  
+		  <!-- The slideshow -->
+		  <div class="carousel-inner">
+		  
+		  	<div class="carousel-item active">
+		      <img id="im1" src="resources/F.C/event1_2.png" alt="이벤트1" class="d-block mx-auto">
+		    </div>
+		    
+		    <div class="carousel-item">
+		      <img id="im2" src="resources/F.C/event2_2.png" alt="이벤트2" class="d-block mx-auto ">
+		    </div>
+		    
+		    <div class="carousel-item">
+		      <img id="im3" src="resources/F.C/event3_2.png" alt="이벤트3" class="d-block mx-auto ">
+		    </div>
+
+		  </div>
+	</div>		
+</section>
+<!-- 모달 -->
+<div id="myModal" class="modal">
+	<span class="close">&times;</span>
+  	<img class="modal-content" id="img01">
+</div>
+<!-- 모달 끝 -->
+<!-- 배너 끝 -->
 
 <section id="sec">
 	<div id="ad1">
 		<!-- header2 : 주소 검색 -->
 		<div id="ad2" class="container">
-			
-			<h1>"어디로 <b class="text text-primary">배달</b>해드릴까요?"</h1>
-			<h5>배달받으실 주소를 검색하여 설정해주세요.</h5>
-			<br/>
 			<span id="guide" style="color:#999;display:none"></span>
-			<!--
-			<input type="text" id="sample4_postcode" placeholder="우편번호" style="display:none">
-			-->
-			<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
-			
+			<input type="text" id="sample4_jibunAddress" placeholder="지번주소" style="display:none">
 			<div id="btn" class="btn-group btn-group-lg">
 				<input type="search" id="sample4_extraAddress" class="btn" placeholder="검색을 클릭하여 주소를 설정해주세요." readonly>
 				<!-- readonly는 읽는거만 가능 입력 불가 대신 form안에서 사용시 전송은 가능 -->
@@ -214,6 +324,38 @@ a:hover,a:link,a:visited {
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script>
+//모달 자바스크립트 코드
+//Get the modal
+var modal = document.getElementById("myModal");
+var modalImg = document.getElementById("img01");
+
+$("#im1").click(function(){
+	modal.style.display = "block";
+  	modalImg.src = 'resources/F.C/event1_1.png';
+  	$("#indicator").hide();
+});
+$("#im2").click(function(){
+	modal.style.display = "block";
+  	modalImg.src = 'resources/F.C/event2_1.png';
+  	$("#indicator").hide();
+});
+$("#im3").click(function(){
+	modal.style.display = "block";
+  	modalImg.src = 'resources/F.C/event3_1.png';
+  	$("#indicator").hide();
+});
+
+//모달차 닫기
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+  modal.style.display = "none"; //x클릭시 모달 닫기
+  $("#indicator").show(); //모달 띄울때 숨긴거 다시 표시
+}
+
+
 //다음 주소 API
 //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.

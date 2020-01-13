@@ -9,18 +9,6 @@
 <mapper namespace="com.jung.sample.dao.TDao">
  	
  	<!-- 회원가입 -->
- 	<insert id="joinDao"  parameterType="com.jung.sample.dto.TDto">
- 		INSERT INTO TEST (TID, TPW) 
-		VALUES (#{tId}, #{tPw})
- 	</insert>
- 	
- 	<select id="checkId" resultType="String" parameterType="com.jung.sample.dto.TDto">
- 		SELECT TID
- 		FROM TEST
- 		WHERE TID = #{tId}
- 	</select>
- 	
- 	<!-- 회원가입2 -->
  	<insert id="join"  parameterType="com.jung.sample.dto.JoinDto">
  		INSERT INTO JOININFO (USERID, USERPW, USERNAME, USEREMAIL, USERPHONE, USERAGREE1, USERAGREE2) 
 		VALUES (#{uId}, #{uPw}, #{uName}, #{uEmail}, #{uPhone}, #{uAg1}, #{uAg2})
