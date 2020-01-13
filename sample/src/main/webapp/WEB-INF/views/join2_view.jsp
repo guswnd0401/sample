@@ -69,7 +69,7 @@ a:hover,a:link,a:visited {
 </head>
 <body>
 <div class="container">
-	<form id="joinForm" name="Form" action="join2" method="post">
+	<form id="joinForm" name="Form" action="join" method="post">
 		<div id="content">
 		
 			<div id="c1">
@@ -79,8 +79,8 @@ a:hover,a:link,a:visited {
 			<div id="c2">
 				<h5>아이디</h5>
 				<input id="userid" type="text" name="uId" placeholder=" 아이디를 입력하세요."><br/>
-				<b><span id="userid1"></span></b><br/>
-				<input id="idcheck" type="button" value="중복확인">
+				<b><span id="userid1"></span></b>
+				<!-- <input id="idcheck" type="button" value="중복확인"> -->
 			</div>
 			
 			<br/>
@@ -219,7 +219,46 @@ $(document).ready(function() {
 		
 	});
 	
-	//아이디 중복체크
+	//아이디 중복체크 버튼없이 아이디 중복 알려주는거
+	$("#userid").blur(function() {
+		
+		if(!document.Form.uId.value) { //아이디 중복체크시 아이디 값이 없으면 중복체크 불가능하게 함
+			$("#userid1").css("color","red");
+			$("#userid1").html("아이디를 입력하지 않았습니다.");
+			$("#userid").focus();
+			return false;
+		}
+		
+		$.ajax({
+			url:"IdCheck",
+			type:"post",
+			data:{
+				uId:$("#userid").val()
+			},
+			
+			success:function(data) {
+				if(data=="ok") {
+					$("#userid1").css("color","green");
+					$("#userid1").html("사용가능한 아이디입니다.");//모달로 띄어도 상관없음
+					//$("#userid").attr("readonly",true); //아이디 중복확인시 아이디 재입력 되지 않게하기 
+					join = true;//join을 true로 해서 submit가 가능하게함
+				}
+				if(data=="no") {
+					$("#userid1").css("color","red");
+					$("#userid1").html("이미 사용중인 아이디입니다.");
+					join = false;
+					$("#userid").val("");
+					$("#userid").focus();
+				}
+				
+			}
+			
+		});
+		
+	}); //아이디 중복체크 ajax
+	
+	/*
+	//아이디 중복체크 버튼 있는거
 	$("#idcheck").click(function() {
 		
 		if(!document.Form.uId.value) { //아이디 중복체크시 아이디 값이 없으면 중복체크 불가능하게 함
@@ -256,11 +295,7 @@ $(document).ready(function() {
 		});
 		
 	}); //아이디 중복체크 ajax
-	
-	$("#resetbtn").click(function() {
-		location.reload();
-	})
-	
+	*/
 	
 });
 
