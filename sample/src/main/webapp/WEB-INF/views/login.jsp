@@ -9,7 +9,7 @@
 <html lang="ko">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
 <!--bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!--font-awesome -->
@@ -59,7 +59,8 @@ a:hover,a:link,a:visited {
 <body>
 
 <div class="container">
-	<form action="#" method="post">
+	<form action="login" method="post">
+		<input type="hidden" name="${_csrf.parameterName}"	value="${_csrf.token}" /><br/>
 		<div id="id1">
 			<a id="logo" href="home">HK라이더스</a><br/><br/><br/>
 			<div>
@@ -77,7 +78,7 @@ a:hover,a:link,a:visited {
 			</div>
 			
 			<br><hr/><br/>
-			
+			<input id="remember_me" name ="_spring_security_remember_me" type="checkbox"/>Remember me
 			<div>
 				<a href="#">아이디 찾기</a>&nbsp;&nbsp;<a href="#">비밀번호 찾기</a>&nbsp;&nbsp;<a href="join_view">회원가입</a>
 			</div>
@@ -92,6 +93,28 @@ a:hover,a:link,a:visited {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!--javascript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+<script>
+$(document).ready(function(){	
+	$("#frm1").submit(function(){
+		event.preventDefault();
+		$.ajax({
+			url : $("#frm1").attr("action"),
+			type : $("#frm1").attr("method"),
+			data : $("#frm1").serialize(), //서버로 보내는 데이터
+			dataType : "text", //응답데이터형 
+			beforeSend : function(xhr, settings) { //xhr은 XmlHttpRequest객체
+				xhr.setRequestHeader("X-CSRF-TOKEN", $("meta[name='_csrf']").attr('content'));
+			},
+			success : function() {				
+				location.href = "mainFrame";
+			},
+			error : function() { //서버 에러
+				$("#div1").text("server error");
+			}
+		});
+		
+	});
+});
+</script>
 </body>
 </html>
