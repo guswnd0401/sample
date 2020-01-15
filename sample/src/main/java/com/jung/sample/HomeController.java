@@ -75,7 +75,7 @@ public class HomeController {
 	public String join2(HttpServletRequest request, Model model) {
 		dao.join(request.getParameter("uId"), request.getParameter("uPw"),request.getParameter("uName"), request.getParameter("uEmail"),
 		request.getParameter("uPhone"), request.getParameter("uAg1"), request.getParameter("uAg2"));
-		return "redirect:login_view";
+		return "redirect:login";
 	}
 	
 	//메인페이지에서 회원가입 클릭시 회원가입페이지 이동.
