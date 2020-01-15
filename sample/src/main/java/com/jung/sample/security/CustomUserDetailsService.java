@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.jung.sample.dao.TestDao;
@@ -13,7 +14,7 @@ import com.jung.sample.dto.JoinDto;
 import com.jung.sample.util.Constant;
 
 //spring security를 사용하면 클라이언트에서 요청(login)하면 이곳으로 요청됨
-public class CustomUserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
 	@Override //security에서 호출하는 메서드
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		System.out.println(username);

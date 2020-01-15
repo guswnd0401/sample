@@ -4,12 +4,16 @@ import org.apache.ibatis.session.SqlSession;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.jung.sample.dto.JoinDto;
 
 @Repository
 public class TestDao implements TDao {
+	
+	JdbcTemplate template;
 	
 	@Autowired
 	private SqlSession sqlSession; //field·Î autowired
@@ -33,5 +37,15 @@ public class TestDao implements TDao {
 		
 	}
 	
+	public JoinDto login(String username) {		
+		System.out.println(username);
+		String sql = "SELECT USERID,USERPW,USERNAME,USEREMAIL,USERPHONE,USERCODE,USERDATE FROM USERINFO WHERE USERID='"+ username +"'";
+		System.out.println(sql);
+		JoinDto uId = template.queryForObject(sql, new BeanPropertyRowMapper<JoinDto>(JoinDto.class));
+		System.out.println(uId);
+		System.out.println(uId.getuPw());
+		
+		return uId;		
+	}
 
 }
