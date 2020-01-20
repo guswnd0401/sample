@@ -5,6 +5,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!-- 로그인,로그아웃 버튼에 사용하는 시큐리티 태그라이브러리 추가 -->
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -19,6 +21,11 @@
 
 <title>Insert title here</title>
 <style>
+/* 로그인 버튼 */
+#logbtn1, #logbtn2 {
+	background-color: #FF4848;
+}
+
 /*헤더1(로그인,회원가입,로고)*/
 #logo {
 	color : white;
@@ -175,7 +182,17 @@ a:hover,a:link,a:visited {
 		<div class="container">
 	 		<ul class="navbar-nav">
 		   		<li class="nav-item active">
-		    			<a class="nav-link" href="login_view"><h3>로그인</h3></a>
+		   			<!-- 로그인한 뒤에 로그아웃으로 바뀌는 부분 -->
+		   			<sec:authorize access="isAnonymous()">
+   						<button type="button" class="btn btn-lg" style="color:#FFFFFF;"
+   								onclick="location.href='login?log=start'">로그인</button>
+					</sec:authorize>
+					<sec:authorize access="isAuthenticated()">   							
+						<form action="logout" method="POST">
+        					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+        					<button type="submit" class="btn btn-lg" style="color:#FFFFFF;">로그아웃</button>
+    					</form>
+   					</sec:authorize>
 		   		</li>
 		   		
 			    <li class="nav-item">

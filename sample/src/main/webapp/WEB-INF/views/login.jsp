@@ -68,7 +68,7 @@ a:hover,a:link,a:visited {
 			</div>
 			<br/>
 			<div>
-				<input id="pw" type="text" name="uPw" placeholder="  비밀번호">
+				<input id="pw" type="password" name="uPw" placeholder="  비밀번호">
 			</div>
 			
 			<br/>

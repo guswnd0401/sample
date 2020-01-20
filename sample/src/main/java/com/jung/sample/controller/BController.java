@@ -24,14 +24,17 @@ public class BController {
 		
 		if (log != null) {
 			model.addObject("log", "before login!");
+			model.setViewName("login");
 		} 
 		if (error != null) {
 			model.addObject("error", "Invalid username and password!");
 		} 
+		//로그아웃 버튼 이후 이동하는 페이지 이름
 		if (logout != null) {
 			model.addObject("msg", "You've been logged out successfully.");
+			model.setViewName("mainFrame");
 		}
-		model.setViewName("login");
+		//model.setViewName("login");
 		
 		return model;		
 	}
