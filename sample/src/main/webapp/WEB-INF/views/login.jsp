@@ -57,12 +57,11 @@ a:hover,a:link,a:visited {
 </style>
 </head>
 <body>
-
 <div class="container">
 	<form action="login" method="post">
 		<input type="hidden" name="${_csrf.parameterName}"	value="${_csrf.token}" /><br/>
 		<div id="id1">
-			<a id="logo" href="home">HK라이더스</a><br/><br/><br/>
+			<a id="logo" href="">HK라이더스</a><br/><br/><br/>
 			<div>
 				<input id="id" type="text" name="uId" placeholder="  아이디">
 			</div>
@@ -115,6 +114,7 @@ $(document).ready(function(){
 		
 	});
 });
+
 </script>
 </body>
 </html>
