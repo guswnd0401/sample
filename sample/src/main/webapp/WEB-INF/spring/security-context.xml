@@ -28,9 +28,9 @@
 		<!-- <intercept-url pattern="/**" access="hasRole('ROLE_USER')"  requires-channel="https"/> -->
 		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 		<form-login login-page="/login" 
-					username-parameter="uId" 
-					password-parameter="uPw"															
-					default-target-url="/mainFrame" 
+					username-parameter="user_id" 
+					password-parameter="user_pw"															
+					default-target-url="/main" 
 					authentication-failure-url="/login?error=1"	
 					always-use-default-target='true'
 					/>		
