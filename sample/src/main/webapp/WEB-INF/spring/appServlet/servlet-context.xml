@@ -18,6 +18,7 @@
 	<resources mapping="/style/**" location="/resources/style/" />
 	<resources mapping="/js/**" location="/resources/js/" />
 	<resources mapping="/images/**" location="/resources/images/" />
+	<resources mapping="/img/**" location="D:/TeamProject" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -30,14 +31,14 @@
 	<beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		<beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" />
-		<beans:property name="username" value="scott" />
-		<beans:property name="password" value="tiger" />
+		<beans:property name="username" value="team" />
+		<beans:property name="password" value="team" />
 	</beans:bean>
 	
 	<!-- myBatis는  SqlSessionFactoryBean클래스와 SqlSessionTemplate클래스의 객체를 이용하여 sql처리-->
 	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource"></beans:property>
-		<beans:property name="mapperLocations" value="classpath:com/jung/sample/mapper/*.xml">
+		<beans:property name="mapperLocations" value="classpath:com/jung/sample/dao/mapper/*.xml">
 		</beans:property>
 	</beans:bean>
 	
@@ -46,15 +47,33 @@
 		<beans:constructor-arg index="0"  ref="sqlSessionFactory"></beans:constructor-arg>
 	</beans:bean>
 	
-	<!-- 
-	<beans:bean name="dao" class="com.jung.sample.dao.TestDao">
+	<beans:bean name="template" class="org.springframework.jdbc.core.JdbcTemplate">
+		<beans:property name="dataSource" ref="dataSource"/>
+	</beans:bean>
+	
+	<!-- transaction bean -->
+	<beans:bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<beans:property name="dataSource" ref="dataSource" />
+	</beans:bean>
+	
+	
+	<beans:bean name="dao" class="com.jung.sample.dao.StoreDao">
 		<beans:property name="template" ref="template" />
 		<beans:property name="transactionManager" ref="transactionManager" />		
 	</beans:bean>
-	 -->
+	
+	<!-- 비밀번호 암호화 부분 -->
+	<beans:bean name="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/> 
+	
+	<!-- 파일업로드 추가부분 -->
+	<!-- fileUpload -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- max Upload size in bytes -->
+		<beans:property name="maxUploadSize" value="5242880"/> <!-- 5MB -->
+		<!-- max size of file in memory(in byte) -->
+		<beans:property name="maxInMemorySize" value="10485760"/> <!-- 10MB -->	
+	</beans:bean>
 	
 	<context:component-scan base-package="com.jung.sample" />
-	
-	
 	
 </beans:beans>

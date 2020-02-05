@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jung.sample.dao.TestDao;
-import com.jung.sample.dto.JoinDto;
+import com.jung.sample.dao.UserDao;
+import com.jung.sample.dto.UserDto;
 
 
 /**
@@ -36,7 +36,7 @@ public class HomeController {
 	private SqlSession sqlSession;	
 	
 	@Autowired
-	private TestDao dao;
+	private UserDao dao;
 	
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -53,9 +53,16 @@ public class HomeController {
 		return "main";
 	}
 	
-	@RequestMapping("home")
+	//홈 = main
+	@RequestMapping("home") //홈은 메인
 	public String home() {
-		return "main";
+		return "main_view";
+	}
+	
+	//회원가입화면 이동
+	@RequestMapping("join_view")
+	public String join_view() {
+		return "join_view";
 	}
 	
 	//메인화면에서 로그인클릭하여 로그인페이지 이동
@@ -69,47 +76,40 @@ public class HomeController {
 	public String login() {
 		return "redirect:home";
 	}
-	
-	//회원가입2
-	@RequestMapping("join")
-	public String join2(HttpServletRequest request, Model model) {
-		dao.join(request.getParameter("uId"), request.getParameter("uPw"),request.getParameter("uName"), request.getParameter("uEmail"),
-		request.getParameter("uPhone"), request.getParameter("uAg1"), request.getParameter("uAg2"));
-		return "redirect:login";
+
+	//===================================== 관리자 페이지
+	//관리자 가게등록 페이지
+	@RequestMapping("StoreRegister")
+	public String Store_Register() {
+		return "StoreRegister_view";
 	}
 	
-	//메인페이지에서 회원가입 클릭시 회원가입페이지 이동.
-	@RequestMapping("join_view")
-		public String join_view2() {
-		return "join2_view";
+	
+	//====================================== 사장페이지
+	//입점문의 페이지
+	@RequestMapping("StoreApply")
+	public String StoreApply() {
+		return "StoreApply_view";
 	}
 	
-	//회원가입2 아이디 중복체크
-	@RequestMapping("IdCheck")
-		public @ResponseBody String IdCheck(JoinDto dto1) {
-		
-		String result1 = null;
-		
-		try {
-		
-			String str = dao.IdCheck(dto1);
-		
-			if(str == null) {
-				System.out.println("DB에 아이디가 없음");
-				result1 = "ok";
-			}
-			else {
-				System.out.println("DB에 아이디 존재");
-				result1 = "no";
-			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
+	//입점문의 수정
 	
 	
-		return result1;
+	//입점문의 삭제
 	
+	
+	//메뉴등록 및 추가
+	@RequestMapping("Menu_apply")
+	public String Menu_apply() {
+		return "MenuApply_view";
 	}
+	
+	//메뉴수정
+	
+	
+	//메뉴삭제
+	
+	
+	//메뉴리스트
 	
 }

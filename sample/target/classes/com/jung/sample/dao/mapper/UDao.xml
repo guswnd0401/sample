@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DOCTYPE엘리먼트 -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- mapper.xml문서의 최상위 엘리먼트로 이 안에다 sql처리를 만들어 줌 --> 
+ <!-- namespace속성은 interface의 패키지포함 경로 -->  
+
+<mapper namespace="com.jung.sample.dao.UDao">
+ 	
+ 	<!-- 회원가입 Test -->
+ 	<insert id="signup"  parameterType="com.jung.sample.dto.UserDto">
+ 		INSERT INTO USER_INFO (USER_ID, USER_PW, USER_NAME, USER_SEX, USER_EMAIL, USER_PHONE, USER_PROFILE, USER_AG1, USER_AG2, USER_CODE) 
+		VALUES (#{user_id}, #{user_pw}, #{user_name}, #{user_sex}, #{user_email}, #{user_phone}, #{user_profile}, #{user_ag1}, #{user_ag2}, 'CUSTOM')
+ 	</insert>
+ 	
+ 	<!-- 회원가입 sample 아이디 중복체크 -->
+ 	<select id="IdCheck" resultType="String" parameterType="com.jung.sample.dto.UserDto">
+ 		SELECT USER_ID
+ 		FROM USER_INFO
+ 		WHERE USER_ID = #{user_id}
+ 	</select>
+ 	
+ 	<!-- 회원목록 -->
+ 	<select id="userlist" resultType="com.jung.sample.dto.UserDto">
+ 		SELECT * FROM USER_INFO ORDER BY USER_DATE
+ 	</select>
+ 
+</mapper>
+ 
+ <!-- 
+ mapper엘리먼트 안에는 각 sql의 DML인 select,insert,delete,update등의 엘리먼트가 옴
+ 기타엘리먼트로는  sql - 다른 구문에서 재사용하기 위한 SQL 조각,
+ cache - 해당 네임스페이스을 위한 캐시 설정,
+ cache-ref - 다른 네임스페이스의 캐시 설정에 대한 참조,
+ resultMap - 데이터베이스 결과데이터를 객체에 로드하는 방법을 정의하는 엘리먼트
+ id는 interface의 메서드 이름,parameterType은 메서드의 파라메터 변수형,resultType은 
+ 메서드의 리턴 타입을 적어줌(객체형은 패키지 까지 포함)
+ #{파라메터명}으로 preparedStatement의 ?에 사용되는 값
+  -->
