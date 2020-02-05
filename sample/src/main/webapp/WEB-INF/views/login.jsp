@@ -10,6 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
+
 <!--bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!--font-awesome -->
@@ -18,9 +19,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-body {
-	 background-color : #d7f4e6;
-}
 form {
 	width : 500px;
 	height : 500px;
@@ -39,16 +37,18 @@ form {
 #login {
 	width : 350px;
 	height : 50px;
-	background-color : #b0e7cc;
+	background-color : #FF4848;
 	color : white;
 	font-size : 25px;
+	font-weight : bolder;
 }
 hr {
 	border : 0.5px solid gray;
 }
 #logo {
 	font-size : 50px;
-	color : green;
+	color : #FF4848;
+	font-weight : bolder; 
     cursor:pointer; /*커서포인트 마우스 대면 커서모양 변함*/
 }
 a:hover,a:link,a:visited {
@@ -57,17 +57,18 @@ a:hover,a:link,a:visited {
 </style>
 </head>
 <body>
+
 <div class="container">
-	<form action="login" method="post">
-		<input type="hidden" name="${_csrf.parameterName}"	value="${_csrf.token}" /><br/>
+	<form id="loginForm" action="login" method="POST">
+	<input type="hidden" name="${_csrf.parameterName}"	value="${_csrf.token}" /><br/>
 		<div id="id1">
-			<a id="logo" href="">HK라이더스</a><br/><br/><br/>
+			<a id="logo" href="home">HK라이더스</a><br/><br/><br/>
 			<div>
-				<input id="id" type="text" name="uId" placeholder="  아이디">
+				<input id="id" type="text" name="user_id" placeholder="  아이디">
 			</div>
 			<br/>
 			<div>
-				<input id="pw" type="password" name="uPw" placeholder="  비밀번호">
+				<input id="pw" type="password" name="user_pw" placeholder="  비밀번호">
 			</div>
 			
 			<br/>
@@ -93,19 +94,20 @@ a:hover,a:link,a:visited {
 <!--javascript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
+/*
 $(document).ready(function(){	
-	$("#frm1").submit(function(){
+	$("#loginForm").submit(function(){
 		event.preventDefault();
 		$.ajax({
-			url : $("#frm1").attr("action"),
-			type : $("#frm1").attr("method"),
-			data : $("#frm1").serialize(), //서버로 보내는 데이터
+			url : $("#loginForm").attr("action"),
+			type : $("#loginForm").attr("method"),
+			data : $("#loginForm").serialize(), //서버로 보내는 데이터
 			dataType : "text", //응답데이터형 
 			beforeSend : function(xhr, settings) { //xhr은 XmlHttpRequest객체
 				xhr.setRequestHeader("X-CSRF-TOKEN", $("meta[name='_csrf']").attr('content'));
 			},
 			success : function() {				
-				location.href = "mainFrame";
+				location.href = "main_view";
 			},
 			error : function() { //서버 에러
 				$("#div1").text("server error");
@@ -113,8 +115,7 @@ $(document).ready(function(){
 		});
 		
 	});
-});
-
+});*/
 </script>
 </body>
 </html>

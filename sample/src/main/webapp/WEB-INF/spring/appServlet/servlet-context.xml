@@ -38,7 +38,7 @@
 	<!-- myBatis는  SqlSessionFactoryBean클래스와 SqlSessionTemplate클래스의 객체를 이용하여 sql처리-->
 	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource"></beans:property>
-		<beans:property name="mapperLocations" value="classpath:com/jung/sample/dao/mapper/*.xml">
+		<beans:property name="mapperLocations" value="classpath:com/jung/TeamProject/dao/mapper/*.xml">
 		</beans:property>
 	</beans:bean>
 	
@@ -56,7 +56,7 @@
 		<beans:property name="dataSource" ref="dataSource" />
 	</beans:bean>
 	
-	
+	<!--  -->
 	<beans:bean name="dao" class="com.jung.sample.dao.StoreDao">
 		<beans:property name="template" ref="template" />
 		<beans:property name="transactionManager" ref="transactionManager" />		
