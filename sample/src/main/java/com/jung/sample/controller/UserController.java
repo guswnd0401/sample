@@ -98,13 +98,13 @@ public class UserController {
 	///////////////// 위에까지는 성공
 	
 	//로그인
-	@RequestMapping(value = "login", method = RequestMethod.GET)
+	@RequestMapping(value = "login1", method = RequestMethod.GET)
 	public ModelAndView login(
 			@RequestParam(value = "log", required = false) String log,
 			@RequestParam(value = "error", required = false) String error,
 			@RequestParam(value = "logout", required = false) String logout) {
 		
-		System.out.println("로그인 컨트롤러에 들어옴");
+		System.out.println("컨트롤러에 들어옴");
 		
 		ModelAndView model = new ModelAndView();		
 		

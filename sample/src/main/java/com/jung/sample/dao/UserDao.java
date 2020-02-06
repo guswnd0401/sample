@@ -67,7 +67,7 @@ public class UserDao implements UDao {
 	//로그인 시큐리티
 	public UserDto login(String username) {		
 
-		System.out.println(username);
+		System.out.println("dao 로그인 입력값 : " + username);
 		
 		String sql = "SELECT USER_ID, USERPW, USER_NAME, USER_SEX, USER_EMAIL, USER_PHONE, USER_AG1, USER_AG2, USER_CODE, USER_DATE"
 				+ " FROM USER_INFO WHERE USER_ID='"+ username +"'";
@@ -77,7 +77,7 @@ public class UserDao implements UDao {
 		
 		
 		System.out.println(uId);
-		System.out.println(uId.getUser_pw());
+		System.out.println("sql 출력 후 PW : " + uId.getUser_pw());
 		
 		/*
 		System.out.println("==================");

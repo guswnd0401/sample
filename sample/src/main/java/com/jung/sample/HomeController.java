@@ -30,15 +30,7 @@ import com.jung.sample.dto.UserDto;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	
-	@Autowired //servlet-context.xml의 bean과 매핑
-	private SqlSession sqlSession;	
-	
-	@Autowired
-	private UserDao dao;
-	
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
@@ -50,7 +42,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "main";
+		return "main_view";//첫화면
 	}
 	
 	//홈 = main
@@ -74,9 +66,10 @@ public class HomeController {
 	//로그인화면에서 로그인할 때  
 	@RequestMapping("login")
 	public String login() {
+		System.out.println("로그인화면에서 로그인할 때 ");
 		return "redirect:home";
 	}
-
+	
 	//===================================== 관리자 페이지
 	//관리자 가게등록 페이지
 	@RequestMapping("StoreRegister")
@@ -111,5 +104,4 @@ public class HomeController {
 	
 	
 	//메뉴리스트
-	
 }

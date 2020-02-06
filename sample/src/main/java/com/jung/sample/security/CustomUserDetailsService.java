@@ -17,7 +17,7 @@ import com.jung.sample.util.Constant;
 public class CustomUserDetailsService implements UserDetailsService {
 	@Override //security에서 호출하는 메서드
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		System.out.println(username);
+		System.out.println("커스텀 유저 입력값 : " + username);
 		
 		UserDao dao = Constant.dao;
 		UserDto dto = dao.login(username);
@@ -31,6 +31,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 		Collection<SimpleGrantedAuthority> roles = new ArrayList<SimpleGrantedAuthority>();
 		roles.add(new SimpleGrantedAuthority("ROLE_USER"));
 		UserDetails user = new User(username, pw, roles);
+		
+		System.out.println("아이디 : " + username);
+		System.out.println("패스워드 : " + pw);
+		System.out.println("권한 : "+ roles);
 
 		return user;
 	}
