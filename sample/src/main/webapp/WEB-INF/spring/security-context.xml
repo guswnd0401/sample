@@ -26,7 +26,7 @@
 		<intercept-url pattern="/images/**" access="permitAll" />
 		<intercept-url pattern="/login_duplicate" access="permitAll" />
 		<!-- <intercept-url pattern="/**" access="hasRole('ROLE_USER')"  requires-channel="https"/> -->
-		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/**" access="permitAll" />
 		<form-login login-page="/login" 
 					username-parameter="user_id" 
 					password-parameter="user_pw"															
